@@ -1,5 +1,7 @@
 package domain
 
+import "errors"
+
 type Bank struct {
 	ID   int
 	Name string
@@ -9,6 +11,11 @@ var lastBankID int
 
 // domain constructor
 func NewBank(namein string) (Bank, error) {
+
+	if namein == "" {
+		return Bank{}, errors.New("bank name can not be empty")
+	}
+
 	lastBankID++
 	newBank := Bank{ID: lastBankID, Name: namein}
 

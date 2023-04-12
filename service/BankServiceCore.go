@@ -1,5 +1,8 @@
 package service
 
+//aka use case (work flow)
+//integration testng for service not unit: advance
+
 import (
 	"bank/domain"
 	"errors"
