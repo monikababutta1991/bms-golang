@@ -1,6 +1,8 @@
 package domain
 
-import "errors"
+import (
+	"errors"
+)
 
 type Bank struct {
 	ID   int
@@ -37,16 +39,25 @@ func (b *Bank) OpenAccount(c *Customer, depositAmount float64) error {
 func (b *Bank) DepositMoney(c *Customer, depositAmount float64) error {
 	// a.Balance += depositAmount
 
+	if depositAmount <= 0 {
+		return errors.New("deposit amount can not be 0")
+	}
+
 	err := DepositMoneyInAccount(c.Account, depositAmount)
 	if err != nil {
 		return err
 	}
+	// log.Println(c.Account)
 	return nil
 }
 
 // Withdraw money from customer's account
 func (b *Bank) WithdrawMoney(c *Customer, withdrawAmount float64) error {
 	// a.Balance += depositAmount
+
+	if withdrawAmount <= 0 {
+		return errors.New("withdraw amount can not be 0")
+	}
 
 	err := WithdarwMoneyFromAccount(c.Account, withdrawAmount)
 	if err != nil {
@@ -61,5 +72,10 @@ func (b *Bank) CheckCustomerBalance(c *Customer) float64 {
 
 // transfer funds from one account to another
 func (b *Bank) TransferFund(s *Customer, d *Customer, amount float64) error {
+
+	if amount <= 0 {
+		return errors.New("transfer amount can not be 0")
+	}
+
 	return TranserFundsSourceDestination(s.Account, d.Account, amount)
 }
