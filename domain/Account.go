@@ -20,7 +20,7 @@ type Account struct {
 
 var lastAccountID int
 
-// domain constructor
+// domain constructor | builder function
 func NewAccount(customerid int, bankid int, deposit float64) (Account, error) {
 
 	// check if deposit amount is >= minAccountOpeningFundLimit
@@ -60,8 +60,8 @@ func WithdarwMoneyFromAccount(a *Account, withdrawAmount float64) error {
 	return nil
 }
 
-func getAccountBalance(a *Account) float64 {
-	return a.Balance
+func getAccountBalance(a *Account) (float64, error) {
+	return a.Balance, nil
 }
 
 func TranserFundsSourceDestination(sa *Account, da *Account, amount float64) error {

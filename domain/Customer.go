@@ -17,7 +17,7 @@ const CUSTOMER_MIN_AGE = 18
 
 var lastCustomerID int
 
-// domain constructor
+// domain constructor | builder function
 func NewCustomer(namein string, emailin string, dobin time.Time) (Customer, error) {
 
 	// check customer age
@@ -41,6 +41,7 @@ func checkCustomerAge(dob time.Time) bool {
 }
 
 // Assign an account to a customer
-func (c *Customer) AssignAccount(a *Account) {
+func (c *Customer) AssignAccount(a *Account) error {
 	c.Account = a
+	return nil
 }

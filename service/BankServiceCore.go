@@ -14,7 +14,7 @@ import (
 
 type IBankServiceCore interface {
 
-	//Commands
+	//Commands : write or update operations and return error
 	OpenAnAccount(CustomerName string, CustomerEmail string, CustomerDOB time.Time, depositAmount float64) error
 
 	DepositFundInAccount(AccNumber int, depositAmount float64) error
@@ -23,7 +23,7 @@ type IBankServiceCore interface {
 
 	TransferFund(AccNumSource int, AccNumDest int, transferAmount float64) error
 
-	//Query
+	//Query: read operation and return data
 	CheckBankBalance(AccNumSource int) float64
 }
 
@@ -135,14 +135,17 @@ func (bsc *BankServiceCore) TransferFund(AccNumSource int, AccNumDest int, trans
 	return nil
 }
 
-func (bsc *BankServiceCore) CheckBankBalance(AccNumber int) float64 {
+func (bsc *BankServiceCore) CheckBankBalance(AccNumber int) (float64, error) {
 
 	var balance float64
 	for _, cust := range bsc.customers {
 		if cust.Account.AccountNumber == AccNumber {
-			balance = bsc.bank.CheckCustomerBalance(cust)
+			balance, err := bsc.bank.CheckCustomerBalance(cust)
+			if err != nil {
+				return balance, err
+			}
 		}
 	}
 
-	return balance
+	return balance, nil
 }

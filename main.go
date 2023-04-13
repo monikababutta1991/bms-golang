@@ -86,6 +86,11 @@ func main() {
 		log.Println(errTrans)
 	}
 
-	balance := bsc.CheckBankBalance(4)
-	log.Println(balance)
+	balance, errBal := bsc.CheckBankBalance(4)
+	if errBal != nil {
+		log.Println(errBal)
+	} else {
+		log.Println(balance)
+	}
+
 }

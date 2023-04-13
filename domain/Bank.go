@@ -11,7 +11,7 @@ type Bank struct {
 
 var lastBankID int
 
-// domain constructor
+// domain constructor | builder function
 func NewBank(namein string) (Bank, error) {
 
 	if namein == "" {
@@ -66,7 +66,7 @@ func (b *Bank) WithdrawMoney(c *Customer, withdrawAmount float64) error {
 	return nil
 }
 
-func (b *Bank) CheckCustomerBalance(c *Customer) float64 {
+func (b *Bank) CheckCustomerBalance(c *Customer) (float64, error) {
 	return getAccountBalance(c.Account)
 }
 
