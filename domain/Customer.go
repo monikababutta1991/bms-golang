@@ -31,6 +31,10 @@ func NewCustomer(namein string, emailin string, dobin time.Time) (Customer, erro
 	return NewCustomer, nil
 }
 
+func (c *Customer) GetDOB() time.Time {
+	return c.dob
+}
+
 func checkCustomerAge(dob time.Time) bool {
 	now := time.Now()
 	years := now.Year() - dob.Year()

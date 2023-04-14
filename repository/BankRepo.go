@@ -26,7 +26,12 @@ type BankRepo struct {
 type BankDTO struct {
 	gorm.Model
 	ID   int
-	Name string
+	Name string //`gorm:"default:ABC"`
+}
+
+// override
+func (bdto *BankDTO) TableName() string {
+	return "banks"
 }
 
 // constructor

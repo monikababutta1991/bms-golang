@@ -42,3 +42,39 @@ func Test_CreateBankInDbWithInvalidData(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test_GetByID(t *testing.T) {
+	BankRepo, err := NewBankRepo(DSN)
+	if err != nil {
+		t.Fail()
+	}
+
+	_, errBank := BankRepo.GetByID(1)
+	if errBank != nil {
+		t.Fail()
+	}
+}
+
+func Test_GetAll(t *testing.T) {
+	BankRepo, err := NewBankRepo(DSN)
+	if err != nil {
+		t.Fail()
+	}
+
+	_, errBank := BankRepo.GetAll()
+	if errBank != nil {
+		t.Fail()
+	}
+}
+
+func Test_DeleteBankByID(t *testing.T) {
+	BankRepo, err := NewBankRepo(DSN)
+	if err != nil {
+		t.Fail()
+	}
+
+	errDelete := BankRepo.DeleteByID(1)
+	if errDelete != nil {
+		t.Fail()
+	}
+}

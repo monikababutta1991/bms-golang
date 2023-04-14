@@ -24,7 +24,7 @@ type IBankServiceCore interface {
 	TransferFund(AccNumSource int, AccNumDest int, transferAmount float64) error
 
 	//Query: read operation and return data
-	CheckBankBalance(AccNumSource int) float64
+	CheckBankBalance(AccNumSource int) (float64, error)
 }
 
 type BankServiceCore struct {
